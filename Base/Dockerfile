@@ -2,9 +2,6 @@ FROM scaleway/ubuntu:armhf-xenial
 LABEL authors="Selenium <selenium-developers@googlegroups.com>"
 MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 
-# Prepare rootfs for image-builder
-RUN /usr/local/sbin/scw-builder-enter
-
 # Install JAVA8
 RUN echo | add-apt-repository ppa:webupd8team/java                                         \
  && apt-get -q update                                                                      \
@@ -22,9 +19,6 @@ RUN apt-get --force-yes -y -q install \
     unzip \
     wget  \
     && apt-get clean
-
-# Patch rootfs
-COPY ./overlay/ /
 
 #================================================
 # Customize sources for apt-get
@@ -52,8 +46,6 @@ COPY ./overlay/ /
 #    wget \
 #  && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
 #  && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
-
-
 
 #===================
 # Timezone settings
@@ -86,6 +78,3 @@ RUN  sudo mkdir -p /opt/selenium \
   && wget --no-verbose https://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar \
     -O /opt/selenium/selenium-server-standalone.jar
 
-
-# Clean rootfs from image-builder
-RUN /usr/local/sbin/scw-builder-leave
