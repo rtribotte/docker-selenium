@@ -13,7 +13,6 @@ RUN echo | add-apt-repository ppa:webupd8team/java                              
 RUN apt-get --force-yes -y -q install \
     bzip2 \
     ca-certificates \
-    openjdk-8-jre-headless \
     tzdata \
     sudo \
     unzip \
