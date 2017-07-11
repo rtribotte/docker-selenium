@@ -1,6 +1,6 @@
-FROM ubuntu:16.04
+FROM scaleway/ubuntu:armhf-yakkety
 LABEL authors="Selenium <selenium-developers@googlegroups.com>"
-
+MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 #================================================
 # Customize sources for apt-get
 #================================================
